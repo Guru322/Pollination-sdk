@@ -4,7 +4,7 @@
   "description": "A Node.js package for generating images using Pollinations AI API",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node test.js"
   },
   "keywords": [
     "pollinations",

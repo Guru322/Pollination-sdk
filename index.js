@@ -1,16 +1,11 @@
 const axios = require('axios');
-const { Validator } = require('./validator');
+const Validator = require('./validator');
 
 class PollinationsImageGenerator {
   constructor() {
     this.baseUrl = 'https://image.pollinations.ai/prompt';
   }
 
-  /**
-   * Validates and normalizes the input parameters
-   * @param {Object} params - The parameters to validate
-   * @returns {Object} - Normalized parameters
-   */
   validateParams(params) {
     if (!params || typeof params !== 'object') {
       throw new Error('Parameters must be provided as an object');
@@ -32,11 +27,6 @@ class PollinationsImageGenerator {
     }
   }
 
-  /**
-   * Constructs the API URL with the provided parameters
-   * @param {Object} params - The validated parameters
-   * @returns {string} - The constructed URL
-   */
   constructUrl(params) {
     const queryParams = new URLSearchParams({
       model: params.model,
@@ -52,11 +42,6 @@ class PollinationsImageGenerator {
     return `${this.baseUrl}/${encodedPrompt}?${queryParams}`;
   }
 
-  /**
-   * Generates an image based on the provided parameters
-   * @param {Object} params - The parameters for image generation
-   * @returns {Promise<Buffer>} - The generated image as a buffer
-   */
   async generateImage(params) {
     const validatedParams = this.validateParams(params);
     const url = this.constructUrl(validatedParams);
