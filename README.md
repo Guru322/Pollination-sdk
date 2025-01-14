@@ -2,6 +2,8 @@
 
 A Node.js package for generating images using the Pollinations AI API.
 
+[![Node.js Package](https://github.com/Guru322/Pollination-sdk/actions/workflows/npm-publish-github-packages.yml/badge.svg)](https://github.com/Guru322/Pollination-sdk/actions/workflows/npm-publish-github-packages.yml)
+
 ## Installation
 
 ```bash
