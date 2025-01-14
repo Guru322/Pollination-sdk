@@ -1,27 +1,46 @@
-const PollinationsImageGenerator = require('./index');
-const fs = require('fs').promises;
+const PollinationsImageGenerator = require('./index.js');
 
-const generator = new PollinationsImageGenerator();
+describe('PollinationsImageGenerator', () => {
+  let generator;
 
-async function generateImage() {
-  const params = {
-    prompt: 'a beautiful sunset on the beach',
-    model: 'flux',
-    seed: 1736955450,
-    nologo: true,
-    private: false,
-    width: 350,
-    height: 195,
-    enhance: true
-  };
+  beforeEach(() => {
+    generator = new PollinationsImageGenerator();
+  });
 
-  try {
-    const imageBuffer = await generator.generateImage(params);
-    await fs.writeFile('generated-image.jpg', imageBuffer);
-    console.log('Image generated successfully!');
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
-}
+  describe('validateParams', () => {
+    it('should validate and normalize parameters correctly', () => {
+      const params = {
+        prompt: 'test prompt',
+        width: 400,
+        height: 300
+      };
 
-generateImage();
+      const validated = generator.validateParams(params);
+      expect(validated.prompt).toBe('test prompt');
+      expect(validated.width).toBe(400);
+      expect(validated.height).toBe(300);
+      expect(validated.model).toBe('flux');
+    });
+
+    it('should throw error for invalid parameters', () => {
+      const params = {
+        prompt: '',
+        width: -1
+      };
+
+      expect(() => generator.validateParams(params)).toThrow();
+    });
+  });
+
+  describe('generateImage', () => {
+    it('should generate and return an image buffer', async () => {
+      const params = {
+        prompt: 'a beautiful sunset'
+      };
+
+      const imageBuffer = await generator.generateImage(params);
+      expect(Buffer.isBuffer(imageBuffer)).toBeTruthy();
+      expect(imageBuffer.length).toBeGreaterThan(0);
+    });
+  });
+});
