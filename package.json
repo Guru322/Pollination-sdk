@@ -1,6 +1,6 @@
 {
   "name": "pollinations-image-generator",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A Node.js package for generating images using Pollinations AI API",
   "main": "index.js",
    "repository": {
