@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A Node.js package for generating images using Pollinations AI API",
   "main": "index.js",
+   "repository": {
+    "url": "https://github.com/Guru322/Pollination-sdk/"
+},
   "scripts": {
     "test": "jest"
   },
